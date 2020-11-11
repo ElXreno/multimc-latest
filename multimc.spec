@@ -12,7 +12,7 @@
 
 Name:           multimc
 Version:        0.6.12.%{date}git%{multimc_shortcommit}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Minecraft launcher with ability to manage multiple instances
 
 #
@@ -115,19 +115,11 @@ mv -f libraries/libnbtplusplus-%{libnbtplusplus_commit} libraries/libnbtplusplus
     -DMultiMC_UPDATER=OFF \
     .
 
-%if %{with ninja_build}
-%ninja_build -C %{_target_platform}
-%else
-%make_build -C %{_target_platform}
-%endif
+%cmake_build
 
 
 %install
-%if %{with ninja_build}
-%ninja_install -C %{_target_platform}
-%else
-%make_install -C %{_target_platform}
-%endif
+%cmake_install
 
 # Install SVG icon...
 install -Dp -m 0644 application/resources/multimc/scalable/multimc.svg \
@@ -142,11 +134,7 @@ echo "%{_libdir}/%{name}" > "%{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}-%{_
 
 
 %check
-%if %{with ninja_build}
-%ninja_build test -C %{_target_platform}
-%else
-%make_build test -C %{_target_platform}
-%endif
+%ctest
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 
@@ -163,6 +151,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Wed Nov 11 11:44:01 +03 2020 ElXreno <elxreno@gmail.com> - 0.6.12.20201111giteb3e6e4-2
+- rebuilt
+
 * Wed Nov 11 11:13:02 +03 2020 ElXreno <elxreno@gmail.com> - 0.6.12-1
 - Update to version 0.6.12.20201111giteb3e6e4
 
