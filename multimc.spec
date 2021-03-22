@@ -5,14 +5,14 @@
 %global libnbtplusplus_shortcommit  %(c=%{libnbtplusplus_commit}; echo ${c:0:7})
 %global quazip_commit               3691d57d3af13f49b2be2b62accddefee3c26b9c
 %global quazip_shortcommit          %(c=%{quazip_commit}; echo ${c:0:7})
-%global multimc_commit              eb3e6e4c6ae29c9542d6c4b715644b7207c1ee93
+%global multimc_commit              cbc973a5afb1a2ba321ea851f89e7189ce322460
 %global multimc_shortcommit         %(c=%{multimc_commit}; echo ${c:0:7})
 
-%global date                        20201111
+%global date                        20210322
 
 Name:           multimc
 Version:        0.6.12.%{date}git%{multimc_shortcommit}
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Minecraft launcher with ability to manage multiple instances
 
 #
@@ -151,6 +151,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Mon Mar 22 2021 ElXreno <elxreno@gmail.com> - 0.6.12.20210322gitcbc973a-3
+- Update to the latest commit
+
 * Wed Nov 11 11:44:01 +03 2020 ElXreno <elxreno@gmail.com> - 0.6.12.20201111giteb3e6e4-2
 - rebuilt
 
